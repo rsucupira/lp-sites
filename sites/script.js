@@ -3,6 +3,7 @@
 
   const WHATSAPP_NUMBER = '5511934352448';
   const UEBEY_START = 'https://rsucupira.github.io/start/';
+  const UEBEY_ORIGIN = 'https://www.uebey.com';
 
   const currentParams = new URLSearchParams(window.location.search);
   const trackedKeys = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
@@ -33,6 +34,13 @@
     link.href = whatsappUrl(message);
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
+  });
+
+  // Mantém todo o portfólio sob URLs canônicas do domínio Uebey,
+  // inclusive quando a landing é carregada pelo espelho de contingência.
+  document.querySelectorAll('a.project[href^="/sites/projetos/"]').forEach(link => {
+    link.href = `${UEBEY_ORIGIN}${link.getAttribute('href')}`;
+    link.target = '_top';
   });
 
   const menuButton = document.querySelector('.menu-toggle');
