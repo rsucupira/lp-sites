@@ -1,0 +1,68 @@
+(() => {
+  'use strict';
+
+  const WHATSAPP_NUMBER = '5511934352448';
+  const UEBEY_START = 'https://rsucupira.github.io/start/';
+
+  const currentParams = new URLSearchParams(window.location.search);
+  const trackedKeys = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
+
+  function buildStartUrl(plan) {
+    const url = new URL(UEBEY_START);
+    if (plan) url.searchParams.set('plan', plan);
+    url.searchParams.set('utm_source', currentParams.get('utm_source') || 'lp-sites');
+    url.searchParams.set('utm_medium', currentParams.get('utm_medium') || 'referral');
+    url.searchParams.set('utm_campaign', currentParams.get('utm_campaign') || 'uebey-sites');
+    trackedKeys.forEach(key => {
+      const value = currentParams.get(key);
+      if (value) url.searchParams.set(key, value);
+    });
+    return url.toString();
+  }
+
+  function whatsappUrl(message) {
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+  }
+
+  document.querySelectorAll('.start-link').forEach(link => {
+    link.href = buildStartUrl(link.dataset.plan || 'start');
+  });
+
+  document.querySelectorAll('.whatsapp-link').forEach(link => {
+    const message = link.dataset.message || 'Olá. Vim pela Uebey Sites e gostaria de conversar sobre um projeto.';
+    link.href = whatsappUrl(message);
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+  });
+
+  const menuButton = document.querySelector('.menu-toggle');
+  const menu = document.querySelector('.main-nav');
+  if (menuButton && menu) {
+    menuButton.addEventListener('click', () => {
+      const open = menu.classList.toggle('open');
+      menuButton.setAttribute('aria-expanded', String(open));
+    });
+    menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      menu.classList.remove('open');
+      menuButton.setAttribute('aria-expanded', 'false');
+    }));
+  }
+
+  const revealItems = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {threshold: 0.08});
+    revealItems.forEach(item => observer.observe(item));
+  } else {
+    revealItems.forEach(item => item.classList.add('visible'));
+  }
+
+  const year = document.getElementById('year');
+  if (year) year.textContent = String(new Date().getFullYear());
+})();
