@@ -2,8 +2,8 @@
   'use strict';
 
   const WHATSAPP_NUMBER = '5511934352448';
-  const UEBEY_START = 'https://uebey.com/sites/comecar/';
-  const UEBEY_ORIGIN = 'https://uebey.com';
+  const UEBEY_START = 'https://www.uebey.com/sites/iniciar';
+  const UEBEY_ORIGIN = 'https://www.uebey.com';
   const INSTAGRAM_URL = 'https://www.instagram.com/uebeysites/';
 
   const currentParams = new URLSearchParams(window.location.search);
