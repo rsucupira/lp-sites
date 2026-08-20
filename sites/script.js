@@ -2,8 +2,8 @@
   'use strict';
 
   const WHATSAPP_NUMBER = '5511934352448';
-  const UEBEY_START = 'https://rsucupira.github.io/start/';
-  const UEBEY_ORIGIN = 'https://www.uebey.com';
+  const UEBEY_START = 'https://uebey.com/sites/comecar/';
+  const UEBEY_ORIGIN = 'https://uebey.com';
   const INSTAGRAM_URL = 'https://www.instagram.com/uebeysites/';
 
   const currentParams = new URLSearchParams(window.location.search);
@@ -28,10 +28,11 @@
 
   document.querySelectorAll('.start-link').forEach(link => {
     link.href = buildStartUrl(link.dataset.plan || 'start');
+    link.target = '_top';
   });
 
   document.querySelectorAll('.whatsapp-link').forEach(link => {
-    const message = link.dataset.message || 'Olá. Vim pela Uebey Sites e gostaria de conversar sobre um projeto.';
+    const message = link.dataset.message || 'Olá. Vim pela UEBEY Sites e gostaria de conversar sobre um projeto.';
     link.href = whatsappUrl(message);
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
@@ -62,8 +63,7 @@
     footerLinks.appendChild(instagram);
   }
 
-  // Mantém todo o portfólio sob URLs canônicas do domínio Uebey,
-  // inclusive quando a landing é carregada pelo espelho de contingência.
+  // Mantém todo o portfólio sob URLs canônicas do domínio UEBEY.
   document.querySelectorAll('a.project[href^="/sites/projetos/"]').forEach(link => {
     link.href = `${UEBEY_ORIGIN}${link.getAttribute('href')}`;
     link.target = '_top';
