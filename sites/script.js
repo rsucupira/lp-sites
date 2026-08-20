@@ -4,6 +4,7 @@
   const WHATSAPP_NUMBER = '5511934352448';
   const UEBEY_START = 'https://rsucupira.github.io/start/';
   const UEBEY_ORIGIN = 'https://www.uebey.com';
+  const INSTAGRAM_URL = 'https://www.instagram.com/uebeysites/';
 
   const currentParams = new URLSearchParams(window.location.search);
   const trackedKeys = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'];
@@ -35,6 +36,31 @@
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
   });
+
+  // Link oficial do Instagram em dois pontos visíveis: menu e rodapé.
+  const mainNav = document.querySelector('.main-nav');
+  if (mainNav && !mainNav.querySelector('.instagram-link')) {
+    const instagram = document.createElement('a');
+    instagram.className = 'instagram-link';
+    instagram.href = INSTAGRAM_URL;
+    instagram.target = '_blank';
+    instagram.rel = 'noopener noreferrer';
+    instagram.setAttribute('aria-label', 'Instagram da UEBEY Sites');
+    instagram.textContent = 'Instagram ↗';
+    const cta = mainNav.querySelector('.nav-cta');
+    mainNav.insertBefore(instagram, cta || null);
+  }
+
+  const footerLinks = document.querySelector('.footer-main > div');
+  if (footerLinks && !footerLinks.querySelector('.instagram-link')) {
+    const instagram = document.createElement('a');
+    instagram.className = 'instagram-link';
+    instagram.href = INSTAGRAM_URL;
+    instagram.target = '_blank';
+    instagram.rel = 'noopener noreferrer';
+    instagram.textContent = 'Instagram';
+    footerLinks.appendChild(instagram);
+  }
 
   // Mantém todo o portfólio sob URLs canônicas do domínio Uebey,
   // inclusive quando a landing é carregada pelo espelho de contingência.
