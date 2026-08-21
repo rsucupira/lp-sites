@@ -1,0 +1,2 @@
+:HL["/sites/dentistas-vicosa/_next/static/chunks/3mf24rv1x9dpl.css","style"]
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"dor-de-dente-vicosa","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}},"staleTime":300,"buildId":"eLrQ311c10XtM-Qt2L8Et"}
